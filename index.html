@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>輸入數字到 Google 表單</title>
+</head>
+<body>
+    <h2>請輸入數字</h2>
+    <input type="number" id="numberInput" placeholder="輸入數字">
+    <button onclick="sendData()">送出</button>
+
+    <script>
+        function sendData() {
+            var number = document.getElementById("numberInput").value;
+            var url = "https://script.google.com/macros/s/AKfycbxKB9O5Y2-pdhvbmG3PLeAaeBdp5GcbkjVuiIn1xECWWtIrsDCxho148PVyYjgvZBkhlQ/exec"; 
+
+            fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ number: number })
+            })
+            .then(response => response.json())
+            .then(data => alert("成功寫入：" + number))
+            .catch(error => console.error("錯誤:", error));
+        }
+    </script>
+</body>
+</html>
