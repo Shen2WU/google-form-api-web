@@ -16,9 +16,11 @@
             var url = "https://script.google.com/macros/s/AKfycbywMgJ7_lfhiwVOBc7Fq_7_4fhlydaFUkBGc8kep3fMC2H_wGoHadwbr0kMDHpXr9P1Hw/exec"; 
 
             fetch(url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ number: number })
+                method: "GET", // 或 "POST" 但改為 "text/plain"
+                headers: {
+                    'Content-Type': 'text/plain' // 或刪除此行
+                },
+                body: "" // 如果使用 GET,則不需要 body
             })
             .then(response => response.json())
             .then(data => alert("成功寫入：" + number))
