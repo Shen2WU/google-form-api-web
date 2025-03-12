@@ -15,14 +15,14 @@
         function sendData() {
             var number1 = document.getElementById("number1Input").value;
             var number2 = document.getElementById("number2Input").value;
-            var url = "https://script.google.com/macros/s/AKfycbx6_pfDLPG5nOLThNNEmk5DzpvN2GswV1yhc6mBYiFWa5NWImJXdKQlec1XYCDJJzsebg/exec"; 
+            var url = "https://script.google.com/macros/s/AKfycbz14sj0NCwUG--j6RYEz4aCSlQ4OPnvCp4f4JapLu7nqFuPpSL7anhTfdOvpUujfe2p7g/exec"; 
 
             fetch(url, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'text/plain'
                 },
-                body: "2,3"
+                body: JSON.stringify({ number: number1 })
             })
             .then(response => response.json())
             .then(data => alert("成功寫入"))
