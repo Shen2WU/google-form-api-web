@@ -3,42 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>輸入數字到 Google 表單</title>
+    <title>輸入組別到 Google 表單</title>
 </head>
 <body>
-    <h2>請輸入數字</h2>
-    <input type="number" id="number1Input" placeholder="輸入第一個數字">
-    <input type="number" id="number2Input" placeholder="輸入第二個數字">
-    <button onclick="sendData()">送出</button>
+    <h2>第一題DEMO</h2>
+    <input type="number" id="number1Input" placeholder="輸入第一題完成組別">
+    <button onclick="sendData(1)">送出</button>
+    <hr/>
+    <h2>第二題DEMO</h2>
+    <input type="number" id="number2Input" placeholder="輸入第二題完成組別">
+    <button onclick="sendData(2)">送出</button>
+    <hr/>
+    <h2>第三題DEMO</h2>
+    <input type="number" id="number3Input" placeholder="輸入第三題完成組別">
+    <button onclick="sendData(3)">送出</button>
 
     <script>
-        function sendData() {
-            var number1 = document.getElementById("number1Input").value;
-            var number2 = document.getElementById("number2Input").value;
+        function sendData(questionNumber) {
             var url = "https://script.google.com/macros/s/AKfycbz14sj0NCwUG--j6RYEz4aCSlQ4OPnvCp4f4JapLu7nqFuPpSL7anhTfdOvpUujfe2p7g/exec"; 
+
+            var number;
+            switch (questionNumber) {
+                case 1:
+                    number = document.getElementById("number1Input").value;
+                    break;
+                case 2:
+                    number = document.getElementById("number2Input").value;
+                    break;
+                case 3:
+                    number = document.getElementById("number3Input").value;
+                    break;
+                default:
+                    alert("無效的題目編號");
+                    return;
+            }
 
             fetch(url, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'text/plain'
                 },
-                body: JSON.stringify({ number: number1 })
+                body: number
             })
             .then(response => response.json())
-            .then(data => alert("成功寫入"))
-            .catch(error => {
-                console.error("錯誤:", error);
-                alert("寫入失敗，請檢查網路連接或輸入內容");
-            });
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'text/plain'
-                },
-                body: JSON.stringify({ number: number2 })
-            })
-            .then(response => response.json())
-            .then(data => alert("成功寫入"))
+            .then(data => alert("成功寫入第 " + questionNumber + " 題,組別數字: " + data.number))
             .catch(error => {
                 console.error("錯誤:", error);
                 alert("寫入失敗，請檢查網路連接或輸入內容");
