@@ -8,11 +8,13 @@
 <body>
     <h2>請輸入數字</h2>
     <input type="number" id="numberInput" placeholder="輸入數字">
+    <input type="number" id="columnInput" placeholder="輸入列號">
     <button onclick="sendData()">送出</button>
 
     <script>
         function sendData() {
             var number = document.getElementById("numberInput").value;
+            var column = document.getElementById("columnInput").value;
             var url = "https://script.google.com/macros/s/AKfycbz14sj0NCwUG--j6RYEz4aCSlQ4OPnvCp4f4JapLu7nqFuPpSL7anhTfdOvpUujfe2p7g/exec"; 
 
             fetch(url, {
@@ -20,9 +22,9 @@
                 headers: {
                     'Content-Type': 'text/plain'
                 },
-                body: "2,1" // 指定列號和數值
+                body: column + "," + number // 指定列號和數值
             })
-            .then(response => response.json())
+            .then(response => response.text()) // 注意這裡應該是 response.text() 而不是 response.json()
             .then(data => alert("成功寫入"))
             .catch(error => {
                 console.error("錯誤:", error);
