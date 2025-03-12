@@ -13,18 +13,22 @@
     <script>
         function sendData() {
             var number = document.getElementById("numberInput").value;
-            var url = "https://script.google.com/macros/s/AKfycbywMgJ7_lfhiwVOBc7Fq_7_4fhlydaFUkBGc8kep3fMC2H_wGoHadwbr0kMDHpXr9P1Hw/exec"; 
+            var url = "https://script.google.com/macros/s/AKfycbz14sj0NCwUG--j6RYEz4aCSlQ4OPnvCp4f4JapLu7nqFuPpSL7anhTfdOvpUujfe2p7g/exec"; 
 
             fetch(url, {
-                method: "POST", // 或 "POST" 但改為 "text/plain"
+                method: "POST",
                 headers: {
-                    'Content-Type': 'text/plain' // 或刪除此行
+                    'Content-Type': 'text/plain'
                 },
-                body: JSON.stringify({ number: number })
+                body: "2,1" // 指定列號和數值
             })
             .then(response => response.json())
-            .then(data => alert("成功寫入：" + number))
-            .catch(error => console.error("錯誤:", error));
+            .then(data => alert("成功寫入"))
+            .catch(error => {
+                console.error("錯誤:", error);
+                alert("寫入失敗，請檢查網路連接或輸入內容");
+            });
+
         }
     </script>
 </body>
