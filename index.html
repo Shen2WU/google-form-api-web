@@ -43,7 +43,7 @@
                 headers: {
                     'Content-Type': 'text/plain'
                 },
-                body: number
+                body: JSON.stringify({ number: number })
             })
             .then(response => response.json())
             .then(data => alert("成功寫入第 " + questionNumber + " 題,組別數字: " + data.number))
