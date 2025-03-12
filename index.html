@@ -20,18 +20,21 @@
 
     <script>
         function sendData(questionNumber) {
-            var url = "https://script.google.com/macros/s/AKfycbz14sj0NCwUG--j6RYEz4aCSlQ4OPnvCp4f4JapLu7nqFuPpSL7anhTfdOvpUujfe2p7g/exec"; 
-
+            var url = "https://script.google.com/macros/s/AKfycbx6_pfDLPG5nOLThNNEmk5DzpvN2GswV1yhc6mBYiFWa5NWImJXdKQlec1XYCDJJzsebg/exec"; 
+            let col = 1;
             var number;
             switch (questionNumber) {
                 case 1:
                     number = document.getElementById("number1Input").value;
+                    col = 1;
                     break;
                 case 2:
                     number = document.getElementById("number2Input").value;
+                    col = 2;
                     break;
                 case 3:
                     number = document.getElementById("number3Input").value;
+                    col = 3;
                     break;
                 default:
                     alert("無效的題目編號");
@@ -39,11 +42,15 @@
             }
 
             fetch(url, {
+                redirect: "follow",
                 method: "POST",
                 headers: {
                     'Content-Type': 'text/plain'
                 },
-                body: JSON.stringify({ number: number })
+                body: JSON.stringify({
+                            number: number,
+                            col: col
+                        })
             })
             .then(response => response.json())
             .then(data => alert("成功寫入第 " + questionNumber + " 題,組別數字: " + data.number))
