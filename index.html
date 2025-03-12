@@ -30,6 +30,19 @@
                 console.error("錯誤:", error);
                 alert("寫入失敗，請檢查網路連接或輸入內容");
             });
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: JSON.stringify({ number: number2 })
+            })
+            .then(response => response.json())
+            .then(data => alert("成功寫入"))
+            .catch(error => {
+                console.error("錯誤:", error);
+                alert("寫入失敗，請檢查網路連接或輸入內容");
+            });
         }
     </script>
 </body>
