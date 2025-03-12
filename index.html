@@ -20,7 +20,7 @@
                 headers: {
                     'Content-Type': 'text/plain' // 或刪除此行
                 },
-                body: "" // 如果使用 GET,則不需要 body
+                body: JSON.stringify({ number: number })
             })
             .then(response => response.json())
             .then(data => alert("成功寫入：" + number))
