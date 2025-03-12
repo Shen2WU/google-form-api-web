@@ -8,29 +8,23 @@
 <body>
     <h2>請輸入數字</h2>
     <input type="number" id="numberInput" placeholder="輸入數字">
-    <input type="number" id="columnInput" placeholder="輸入列號">
     <button onclick="sendData()">送出</button>
 
     <script>
         function sendData() {
             var number = document.getElementById("numberInput").value;
-            var column = document.getElementById("columnInput").value;
-            var url = "https://script.google.com/macros/s/AKfycbz14sj0NCwUG--j6RYEz4aCSlQ4OPnvCp4f4JapLu7nqFuPpSL7anhTfdOvpUujfe2p7g/exec"; 
+            var url = "https://script.google.com/macros/s/AKfycbywMgJ7_lfhiwVOBc7Fq_7_4fhlydaFUkBGc8kep3fMC2H_wGoHadwbr0kMDHpXr9P1Hw/exec"; 
 
             fetch(url, {
-                method: "POST",
+                method: "POST", // 或 "POST" 但改為 "text/plain"
                 headers: {
-                    'Content-Type': 'text/plain'
+                    'Content-Type': 'text/plain' // 或刪除此行
                 },
-                body: column + "," + number // 指定列號和數值
+                body: JSON.stringify({ number: number })
             })
-            .then(response => response.text()) // 注意這裡應該是 response.text() 而不是 response.json()
-            .then(data => alert("成功寫入"))
-            .catch(error => {
-                console.error("錯誤:", error);
-                alert("寫入失敗，請檢查網路連接或輸入內容");
-            });
-
+            .then(response => response.json())
+            .then(data => alert("成功寫入：" + number))
+            .catch(error => console.error("錯誤:", error));
         }
     </script>
 </body>
