@@ -4,19 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>輸入組別到 Google 表單</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 1rem 0;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #444;
+            font-size: 1.4rem;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.6rem;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h2>第一題DEMO</h2>
-    <input type="number" id="number1Input" placeholder="輸入第一題完成組別">
-    <button onclick="sendData(1)">送出</button>
-    <hr/>
-    <h2>第二題DEMO</h2>
-    <input type="number" id="number2Input" placeholder="輸入第二題完成組別">
-    <button onclick="sendData(2)">送出</button>
-    <hr/>
-    <h2>第三題DEMO</h2>
-    <input type="number" id="number3Input" placeholder="輸入第三題完成組別">
-    <button onclick="sendData(3)">送出</button>
+    <h1>題目 DEMO 輸入</h1>
+
+    <div class="card">
+        <h2>第一題 DEMO</h2>
+        <input type="number" id="number1Input" placeholder="輸入第一題完成組別">
+        <button onclick="sendData(1)">送出</button>
+    </div>
+
+    <div class="card">
+        <h2>第二題 DEMO</h2>
+        <input type="number" id="number2Input" placeholder="輸入第二題完成組別">
+        <button onclick="sendData(2)">送出</button>
+    </div>
+
+    <div class="card">
+        <h2>第三題 DEMO</h2>
+        <input type="number" id="number3Input" placeholder="輸入第三題完成組別">
+        <button onclick="sendData(3)">送出</button>
+    </div>
+
+    <div class="card">
+        <h2>第四題 DEMO</h2>
+        <input type="number" id="number4Input" placeholder="輸入第四題完成組別">
+        <button onclick="sendData(4)">送出</button>
+    </div>
 
     <script>
         function sendData(questionNumber) {
@@ -36,6 +108,10 @@
                     number = document.getElementById("number3Input").value;
                     col = 3;
                     break;
+                case 4:
+                    number = document.getElementById("number4Input").value;
+                    col = 4;
+                    break;
                 default:
                     alert("無效的題目編號");
                     return;
@@ -48,15 +124,15 @@
                     'Content-Type': 'text/plain'
                 },
                 body: JSON.stringify({
-                            number: number,
-                            col: col
-                        })
+                    number: number,
+                    col: col
+                })
             })
             .then(response => response.json())
-            .then(data => alert("成功寫入第 " + questionNumber + " 題,組別數字: " + data.number))
+            .then(data => alert("✅ 成功寫入第 " + questionNumber + " 題，組別數字：" + data.number))
             .catch(error => {
                 console.error("錯誤:", error);
-                alert("寫入失敗，請檢查網路連接或輸入內容");
+                alert("❌ 寫入失敗，請檢查網路連接或輸入內容");
             });
         }
     </script>
