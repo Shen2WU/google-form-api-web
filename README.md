@@ -5,18 +5,25 @@
 
 ## Features
 
-- 目前提供四題任務的輸入欄位，每題可輸入完成的組別編號。
-- 各題皆設有送出按鈕，可即時將資料送至 Google Apps Script。
-- 使用卡片式 UI 介面，操作直覺，適合學生或小組使用。
+- 簡單的網頁表單，讓使用者輸入不同問題的組別號碼。
+- 資料透過 Google Apps Script Web App 提交到 Google 表格。
+- 透過 **Cloudflare Pages** 部署靜態網頁，輕鬆上線。
 
-## Technology Stack
+### **POST Request to Google Apps Script Web App**
 
-- 前端使用 HTML、CSS、JavaScript。
-- 後端透過 Google Apps Script 提供 POST API 寫入 Google Sheet。
-- 不需下載任何應用程式，只需一個瀏覽器即可使用。
-
+這是由前端網頁向 Google Apps Script Web App 發送的請求。
+#### Example Request:
 ## Source and Attribution
+```http
+POST /exec HTTP/1.1
+Host: script.google.com
+Content-Type: application/json
 
+{
+    "number": 5,
+    "col": 1
+}
+```
 本專案的 HTML/JavaScript 架構初版由 ChatGPT 協助產出，  
 本人依據實際需求進行以下修改與擴充：
 
