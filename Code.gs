@@ -1,5 +1,8 @@
+// 建議將 SHEET_ID 設為變數，並從 PropertiesService 或 .env 讀取
+var SHEET_ID = PropertiesService.getScriptProperties().getProperty("SHEET_ID");
+
 function doPost(e) {
-    var sheet = SpreadsheetApp.openById("1AwS4GcqqIf5pBNecp85933lIPJxj0cQH2QwpQy5TSIg").getSheetByName("lab9");  //根據使用的工作表更改
+    var sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName("lab9");  //根據使用的工作表更改
 
     // 確保有接收到請求
     Logger.log("收到請求:", e);
