@@ -92,7 +92,8 @@
 
     <script>
         function sendData(questionNumber) {
-            var url = "https://script.google.com/macros/s/AKfycbxvCfBf91UddBy9wxyUYIgKIGkHnCDjnVE94srnvK3YQQ8pDQxAYxk5VFUHON07vEmYiA/exec"; 
+            // 這裡的 URL 應該是 Cloudflare Worker 的 URL，而非 Google Script 的 URL
+            var url = "https://google-form-api-web.pages.dev";  // 例如：https://example.workers.dev
             let col = 1;
             var number;
             switch (questionNumber) {
@@ -117,6 +118,7 @@
                     return;
             }
 
+            // 使用 fetch 發送 POST 請求到 Cloudflare Worker
             fetch(url, {
                 redirect: "follow",
                 method: "POST",
